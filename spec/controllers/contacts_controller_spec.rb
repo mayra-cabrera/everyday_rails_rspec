@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe ContactsController do
-
   before :each do
     @contact = create(:contact, firstname: 'Lawrence', lastname: 'Smith')
   end
+
   shared_examples("public access to contacts") do
-    describe "GET 'index'" do
+    describe 'GET #index' do
       it "populates an array of contacts" do
         get :index
         expect(assigns(:contacts)).to match_array [@contact]
@@ -32,7 +32,7 @@ describe ContactsController do
   end
 
   shared_examples("full access to contacts") do
-     describe 'GET #new' do
+    describe 'GET #new' do
       it "assigns a new Contact to @contact" do
         get :new
         expect(assigns(:contact)).to be_a_new(Contact)
@@ -160,62 +160,53 @@ describe ContactsController do
     end
   end
 
-  describe "administrator access" do
+  describe "admin access" do
     before :each do
       set_user_session(create(:admin))
     end
-    
+
     it_behaves_like "public access to contacts"
     it_behaves_like "full access to contacts"
   end
+
 
   describe "user access" do
-    before(:each) do
-      user = create(:user)
-      session[:user_id] = user
+    before :each do
+      set_user_session(create(:user))
     end
-    
+
     it_behaves_like "public access to contacts"
     it_behaves_like "full access to contacts"
   end
 
-  describe "guest access" do
 
+  describe "guest access" do
     it_behaves_like "public access to contacts"
 
-
-    describe "GET new" do
-      it "requires a login" do
+    describe 'GET #new' do
+      it "requires login" do
         get :new
         expect(response).to require_login
       end
     end
 
-    describe "GET edit" do
-      it "assigns the requested contact to @contact" do
-        contact = create(:contact)
-        get :edit, id: contact
-        expect(assigns(:contact)).to require_login
-      end
-    end
-
-    describe "POST create" do
+    describe "POST #create" do
       it "requires login" do
-        post :create, id: create(:contact), contact: attributes_for(:contact)
+        post :create, contact: attributes_for(:contact)
         expect(response).to require_login
       end
     end
 
-    describe "PATCH update" do
+    describe 'PATCH #update' do
       it "requires login" do
-        patch :update, id: create(:contact), contact: attributes_for(:contact)
+        patch :update, id: @contact, contact: attributes_for(:contact)
         expect(response).to require_login
       end
     end
 
-    describe "DELETE destroy" do
+    describe 'DELETE #destroy' do
       it "requires login" do
-        delete :destroy, id: create(:contact)
+        delete :destroy, id: @contact
         expect(response).to require_login
       end
     end
