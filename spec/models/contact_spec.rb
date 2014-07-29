@@ -5,26 +5,14 @@ describe Contact do
     expect(build(:contact)).to be_valid
   end
 
-
+  it { should validate_presence_of :firstname }
+  it { should validate_presence_of :lastname }
+  it { should validate_presence_of :email }
+  it { should validate_uniqueness_of(:email) }
+  
   it "is invalid without a firstname" do
     contact = build(:contact, firstname: nil)
     expect(contact).to have(1).errors_on(:firstname)
-  end
-
-  it "is invalid without a lastname" do
-    contact = build(:contact, lastname: nil)
-    expect(contact).to have(1).errors_on(:lastname)
-  end
-
-  it "is invalid without an email address" do
-    contact = build(:contact, email: nil)
-    expect(contact).to have(1).errors_on(:email)
-  end
-
-  it "is invalid with a duplicate email address" do
-    create(:contact, email: "aaron@example.com")
-    contact = build(:contact, email: "aaron@example.com")
-    expect(contact).to have(1).errors_on(:email)
   end
 
   it "returns a contact's full name as a string" do
