@@ -44,6 +44,7 @@ group :test do
   gem "launchy", "~> 2.3.0"
   gem "selenium-webdriver", '~> 2.42.0'
   gem "shoulda-matchers"
+  gem 'email_spec'
 end
 
 gem "twitter-bootstrap-rails", "~> 2.2.8"

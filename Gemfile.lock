@@ -59,6 +59,9 @@ GEM
     coffee-script-source (1.7.0)
     database_cleaner (1.0.1)
     diff-lcs (1.2.5)
+    email_spec (1.6.0)
+      launchy (~> 2.1)
+      mail (~> 2.2)
     erubis (2.7.0)
     execjs (2.2.1)
     factory_girl (4.2.0)
@@ -214,6 +217,7 @@ DEPENDENCIES
   capybara (~> 2.1.0)
   coffee-rails (~> 4.0.0)
   database_cleaner (~> 1.0.1)
+  email_spec
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.1.2)
   guard-rspec (~> 3.0.2)
