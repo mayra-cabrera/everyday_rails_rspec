@@ -12,7 +12,7 @@ describe Contact do
   
   it "is invalid without a firstname" do
     contact = build(:contact, firstname: nil)
-    expect(contact).to have(1).errors_on(:firstname)
+    expect(contact.errors_on(:firstname).size).to eq(1)
   end
 
   it "returns a contact's full name as a string" do

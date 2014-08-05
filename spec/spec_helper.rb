@@ -43,6 +43,7 @@ Spork.prefork do
     config.include(EmailSpec::Matchers)
 
     #config.filter_run focus: true
+    #config.raise_errors_for_deprecations!
   end
 end
 

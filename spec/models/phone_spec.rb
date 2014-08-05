@@ -9,7 +9,7 @@ describe Phone do
     mobile_phone = build(:mobile_phone,
       contact: contact,
       phone: '785-555-1234')
-    expect(mobile_phone).to have(1).errors_on(:phone)
+    expect(mobile_phone.errors_on(:phone).size).to eq(1)
   end
 
   it "allows two contacts to share a phone number" do
